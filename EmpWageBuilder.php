@@ -1,18 +1,16 @@
 <?php
+//Displaying Welcome Message
+echo ("\nWelcome to Employee Wage Computation Problem\n");
 class EmpWageBuilder {
     //Constants
 	const IS_FULL_TIME = 1;
     const IS_PART_TIME = 2;
-    const WAGE_PER_HOUR = 20;
-    const MONTH_DAYS = 25;
-    const MONTH_HOURS = 100;
-    public function computeWage() {
-        //Displaying Welcome Message
-        echo ("Welcome to Employee Wage Computation Problem\n");
+    //Instant variables
+    public function computeWage($company, $monthHours, $monthDays, $wageRate) {
         $totalWorkHrs = 0;
         $daysCount = 0;
         //Calculating wage for Monthly
-		while ($totalWorkHrs <= self::MONTH_HOURS && $daysCount < self::MONTH_DAYS) {
+		while ($totalWorkHrs <= $monthHours && $daysCount < $monthDays) {
             //Computation
             $empCheck = rand(0,2);
             switch ($empCheck) {
@@ -34,10 +32,13 @@ class EmpWageBuilder {
             $daysCount++;
         }
         //Calculating Employee Wage
-        $empWage = $totalWorkHrs*self::WAGE_PER_HOUR;
-        echo ("Employee Wage: ".$empWage."\nWorking hours: ".$totalWorkHrs."\nMonth Days: ".$daysCount);
+        $empWage = $totalWorkHrs*$wageRate;
+        echo ("Wage Details of Company '".$company."'\n-> Employee Wage: ".$empWage.
+        "\n-> Working hours: ".$totalWorkHrs."\n-> Month Days: ".$daysCount."\n");
     }
 }
 $employeeWage = new EmpWageBuilder();
-$employeeWage -> computeWage();
+$employeeWage -> computeWage("JIO", 100, 25, 20);
+$employeeWage -> computeWage("AIRTEL", 80, 20, 25);
+$employeeWage -> computeWage("IDEA", 60, 15, 30);
 ?>
