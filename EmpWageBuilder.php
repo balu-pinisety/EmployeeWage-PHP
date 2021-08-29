@@ -4,13 +4,15 @@ class EmpWageBuilder {
 	const IS_FULL_TIME = 1;
     const IS_PART_TIME = 2;
     const WAGE_PER_HOUR = 20;
-    const MONTH_DAYS = 30;
+    const MONTH_DAYS = 25;
+    const MONTH_HOURS = 100;
     public static function computeWage() {
         //Displaying Welcome Message
         echo ("Welcome to Employee Wage Computation Problem\n");
         $totalWorkHrs = 0;
+        $daysCount = 0;
         //Calculating wage for Monthly
-		for ($i = 0; $i < self::MONTH_DAYS; $i++) {
+		while ($totalWorkHrs <= self::MONTH_HOURS && $daysCount < self::MONTH_DAYS) {
             //Computation
             $empCheck = rand(0,2);
             switch ($empCheck) {
@@ -28,10 +30,12 @@ class EmpWageBuilder {
             }
             //Calculating Employee Total Working Hrs
 			$totalWorkHrs+=$empWorkHrs;
+            //Incremanting Month day Count
+            $daysCount++;
         }
         //Calculating Employee Wage
         $empWage = $totalWorkHrs*self::WAGE_PER_HOUR;
-        echo ("Employee Wage: ".$empWage." for working hours of ".$totalWorkHrs."\n");
+        echo ("Employee Wage: ".$empWage."\nWorking hours: ".$totalWorkHrs."\nMonth Days: ".$daysCount);
     }
 }
 EmpWageBuilder::computeWage();
