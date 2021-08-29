@@ -6,7 +6,7 @@ class EmpWageBuilder {
     const WAGE_PER_HOUR = 20;
     const MONTH_DAYS = 25;
     const MONTH_HOURS = 100;
-    public static function computeWage() {
+    public function computeWage() {
         //Displaying Welcome Message
         echo ("Welcome to Employee Wage Computation Problem\n");
         $totalWorkHrs = 0;
@@ -38,5 +38,6 @@ class EmpWageBuilder {
         echo ("Employee Wage: ".$empWage."\nWorking hours: ".$totalWorkHrs."\nMonth Days: ".$daysCount);
     }
 }
-EmpWageBuilder::computeWage();
+$employeeWage = new EmpWageBuilder();
+$employeeWage -> computeWage();
 ?>
