@@ -4,6 +4,7 @@ class EmpWageBuilder{
     //Constants
 	const IS_FULL_TIME = 1;
     const IS_PART_TIME = 2;
+    //variables
     public $numOfCompany = 0;
     public $companyEmpWageArray = array();
 

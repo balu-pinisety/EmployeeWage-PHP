@@ -6,7 +6,7 @@ class CompanyEmpWage {
     public $monthHours;
     public $monthDays;
     public $wageRate;
-    //creating construct for class 
+    //creating construct function for class 
     public function __construct($company, $monthHours, $monthDays, $wageRate) {
         $this->company = $company;
         $this->monthHours = $monthHours;
