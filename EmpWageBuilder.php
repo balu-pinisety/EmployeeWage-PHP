@@ -1,6 +1,7 @@
 <?php
 include 'CompanyEmpWage.php';
-class EmpWageBuilder{
+include 'InterfaceEmpWage.php';
+class EmpWageBuilder implements InterfaceEmpWage{
     //Constants
 	const IS_FULL_TIME = 1;
     const IS_PART_TIME = 2;
