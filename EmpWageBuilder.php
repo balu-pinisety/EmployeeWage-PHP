@@ -6,18 +6,16 @@ class EmpWageBuilder implements InterfaceEmpWage{
 	const IS_FULL_TIME = 1;
     const IS_PART_TIME = 2;
     //variables
-    public $numOfCompany = 0;
     public $companyEmpWageArray = array();
 
     function addCompanyEmpWage($company, $monthHours, $monthDays, $wageRate) {
-        $this->companyEmpWageArray[$this->numOfCompany++] = new CompanyEmpWage($company, $monthHours, $monthDays, $wageRate);
+        $this->companyEmpWageArray[$company] = new CompanyEmpWage($company, $monthHours, $monthDays, $wageRate);
     }
 
     public function computeEmpWage() {
-        for ($i=0; $i<$this->numOfCompany; $i++) {
-            $obj=$this->companyEmpWageArray[$i];
-            $wage=self::computeWage($obj);
-            echo "Company: '".$obj->company."' Total Employee Wage: ".$wage."\n";
+        foreach ($this->companyEmpWageArray as $key=>$element){
+            $wage=self::computeWage($element);
+            echo "Company: '".$key."' Total Employee Wage: ".$wage."\n";
         }
     }
     
