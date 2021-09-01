@@ -1,30 +1,30 @@
 <?php
-//Displaying Welcome Message
-echo ("\nWelcome to Employee Wage Computation Problem\n");
-class EmpWageBuilder {
-    public $company;
-    public $monthHours;
-    public $monthDays;
-    public $wageRate;
-    //creating construct for class 
-    public function __construct($company, $monthHours, $monthDays, $wageRate) {
-        $this->company = $company;
-        $this->monthHours = $monthHours;
-        $this->monthDays = $monthDays;
-        $this->wageRate = $wageRate;
-    }
-}
-
-class computeEmpWage extends EmpWageBuilder{
+include 'CompanyEmpWage.php';
+class EmpWageBuilder{
     //Constants
 	const IS_FULL_TIME = 1;
     const IS_PART_TIME = 2;
+    public $numOfCompany = 0;
+    public $companyEmpWageArray = array();
+
+    function addCompanyEmpWage($company, $monthHours, $monthDays, $wageRate) {
+        $this->companyEmpWageArray[$this->numOfCompany++] = new CompanyEmpWage($company, $monthHours, $monthDays, $wageRate);
+    }
+
+    public function computeEmpWage() {
+        for ($i=0; $i<$this->numOfCompany; $i++) {
+            $obj=$this->companyEmpWageArray[$i];
+            $wage=self::computeWage($obj);
+            echo "Company: '".$obj->company."' Total Employee Wage: ".$wage."\n";
+        }
+    }
+    
     //calling instance values into child class
-    public function computeWage() {
+    public static function computeWage($obj) {
         $totalWorkHrs = 0;
         $daysCount = 0;
         //Calculating wage for Monthly
-		while ($totalWorkHrs <= $this->monthHours && $daysCount < $this->monthDays) {
+		while ($totalWorkHrs <= $obj->monthHours && $daysCount < $obj->monthDays) {
             //Computation
             $empCheck = rand(0,2);
             switch ($empCheck) {
@@ -41,18 +41,18 @@ class computeEmpWage extends EmpWageBuilder{
                     $empWorkHrs = 0;
             }
             //Calculating Employee Total Working Hrs
-			$totalWorkHrs+=$empWorkHrs;
+			$totalWorkHrs += $empWorkHrs;
             //Incremanting Month day Count
             $daysCount++;
         }
         //Calculating Employee Wage
-        $empWage = $totalWorkHrs*$this->wageRate;
-        echo ("Wage Details of Company '".$this->company."'\n-> Employee Wage: ".$empWage.
-        "\n-> Working hours: ".$totalWorkHrs."\n-> Month Days: ".$daysCount."\n");
+        $empWage = $totalWorkHrs * $obj->wageRate;
+        return $empWage;
     }
 }
-$jioWage = new computeEmpWage("JIO", 100, 25, 20);
-$jioWage -> computeWage();
-$airtelWage = new computeEmpWage("AIRTEL", 80, 20, 25);
-$airtelWage -> computeWage();
+$empWageBuilder = new EmpWageBuilder();
+$empWageBuilder->addCompanyEmpWage("JIO", 100, 25, 20);
+$empWageBuilder->addCompanyEmpWage("AIRTEL", 80, 20, 25);
+$empWageBuilder->addCompanyEmpWage("IDEA", 60, 18, 30);
+$empWageBuilder->computeEmpWage();
 ?>
