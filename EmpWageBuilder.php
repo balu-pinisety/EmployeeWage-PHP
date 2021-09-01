@@ -42,8 +42,12 @@ class EmpWageBuilder implements InterfaceEmpWage{
             }
             //Calculating Employee Total Working Hrs
 			$totalWorkHrs += $empWorkHrs;
+            $dailyWage[$daysCount] =  $empWorkHrs * $obj->wageRate; 
             //Incremanting Month day Count
             $daysCount++;
+        }
+        foreach ($dailyWage as $key=>$element){
+            echo "Day #".$key." Wage: ".$element."\n";
         }
         //Calculating Employee Wage
         $empWage = $totalWorkHrs * $obj->wageRate;
