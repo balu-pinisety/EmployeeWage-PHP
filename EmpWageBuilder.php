@@ -8,14 +8,16 @@ class EmpWageBuilder implements InterfaceEmpWage{
     //variables
     public $companyEmpWageArray = array();
 
-    function addCompanyEmpWage($company, $monthHours, $monthDays, $wageRate) {
+    public function addCompanyEmpWage($company, $monthHours, $monthDays, $wageRate) {
         $this->companyEmpWageArray[$company] = new CompanyEmpWage($company, $monthHours, $monthDays, $wageRate);
     }
 
-    public function computeEmpWage() {
-        foreach ($this->companyEmpWageArray as $key=>$element){
-            $wage=self::computeWage($element);
-            echo "Company: '".$key."' Total Employee Wage: ".$wage."\n";
+    public function computeEmpWage($userComp) {
+        foreach ($this->companyEmpWageArray as $key=>$element) {
+            if ($key == $userComp) {
+                $wage=self::computeWage($element);
+                echo "Company: '".$key."' Total Employee Wage: ".$wage."\n";
+            }
         }
     }
     
@@ -58,5 +60,5 @@ $empWageBuilder = new EmpWageBuilder();
 $empWageBuilder->addCompanyEmpWage("JIO", 100, 25, 20);
 $empWageBuilder->addCompanyEmpWage("AIRTEL", 80, 20, 25);
 $empWageBuilder->addCompanyEmpWage("IDEA", 60, 18, 30);
-$empWageBuilder->computeEmpWage();
+$empWageBuilder->computeEmpWage("AIRTEL");
 ?>
